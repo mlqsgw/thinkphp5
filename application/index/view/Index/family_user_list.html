@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery1.8.0.min.js"></script>
+<script type="text/javascript" src="/static/js/showdate.js"></script>
+<script type="text/javascript" src="/static/js/layer/layer.js"></script>
+<script type="text/javascript" src="/static/js/WdatePicker.js"></script>
+
+
+
+
+<style>
+    .pagelist {padding:10px 0; text-align:center;}
+    .pagelist span,.pagelist a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+    .pagelist a{ margin:0 3px;}
+    .pagelist span.current{ background:#09F; color:#FFF; border-color:#09F; margin:0 2px;}
+    .pagelist a:hover{background:#09F; color:#FFF; border-color:#09F; }
+    .pagelist label{ padding-left:15px; color:#999;}
+    .pagelist label b{color:red; font-weight:normal; margin:0 3px;}
+
+    .show {display: block;}
+    .tip {width: 60%; height: 70%; margin-left:-11%;}
+    .tipinfo li label {margin-right: 30px;}
+    .tipinfo table td {border:1px solid;}
+    .tipbtn{margin-top:30%; margin-left:45%;}
+
+    input{border:1px solid #afacac;background-color:transparent;height: 28px;}
+    tr{height: 50px;}
+    button{width:75px;height: 30px;}
+    .hidden{display: none;}
+
+</style>
+<script language="javascript">
+$(function(){   
+    //导航切换
+    $(".imglist li").click(function(){
+        $(".imglist li.selected").removeClass("selected")
+        $(this).addClass("selected");
+    })  
+})  
+</script>
+
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">数据表</a></li>
+    <li><a href="#">基本内容</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+    
+    	<ul class="toolbar">
+            <li class="button4"><span></span>邀请加入</li>
+            <li class="button5"><span></span>封号</li>
+            <li class="button6"><span></span>解禁</li>
+            <li class="button7"><span></span>踢出家族</li>
+        </ul>
+        
+        <form action="{:url('family_user_list')}" method="get">
+        <ul class="toolbar1">
+            <li><span>开始时间:<input type="text" id="st" name="st" onclick="return Calendar('st');" value="" class="text" style="width:85px;"/>-结束时间<input type="text" id="et" onclick="return Calendar('et');" value="" name="et" class="text" style="width:85px;"/>&nbsp;&nbsp;&nbsp;<input type="text" name="search_name" style="height:22px;background: #d4e7f0;" placeholder="ID/昵称/手机号"><input type="submit" value="搜索" /></span></li>
+        </ul>
+        </form>
+    
+    </div>
+    
+    <table class="tablelist">
+        <thead>
+        <tr>
+        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th>编号<i class="sort"><img src="/static/images/px.gif" /></i></th>
+        <th>用户ID</th>
+        <th>昵称</th>
+        <th>手机号</th>
+        <th>家族</th>
+
+        <th>粉丝数</th>
+        <th>关注数</th>
+        <th>总贡献值</th>
+        <th>总魅力值</th>
+        <th>本期贡献值</th>
+        <th>本期魅力值</th>
+        <th>本期的有效天数</th>
+        <th>本期直播时长</th>
+        <th>期</th>
+        <th>创建时间</th>
+        <th>状态</th>
+        <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="lists" id="family">
+        <tr>
+        <td><input name="family_user_id" type="checkbox" value="{$family.id}" /></td>
+        <td>{$family.id}</td>
+        <td>{$family.id}</td>
+        <td>{$family.user_name}</td>
+        <td>{$family.user_phone}</td>
+        <td>{$family.family_id}</td>
+
+        <td>{$family.fans_num}</td>
+        <td>{$family.attention_num}</td>
+        <td>{$family.contribution_all}</td>
+        <td>{$family.charm_all}</td>
+        <td>{$family.contribution_now}</td>
+        <td>{$family.charm_now}</td>
+        <td>{$family.valid_day_num}</td>
+        <td>{$family.live_time_num}</td>
+        <td>{$family.periods}</td>
+        <td>{$family.create_time|date='Y-m-d H:i:s',###}</td>
+        <td>{$family.user_status}</td>
+
+        <td><a href="#" class="button1" family_id = "{$family.id}" style="color:#066cac">查看资料</a>&nbsp;&nbsp;<a href="{:url('play_detail_list')}?id={$family.id}&&periods={$family.periods}"  style="color:#066cac">本期直播明细</a>&nbsp;&nbsp;<a href="{:url('day_detail_list')}?id={$family.id}&&periods={$family.periods}"  style="color:#066cac">本期每日数据</a></td>
+        </tr> 
+        </volist>
+        </tbody>
+    </table>
+    
+   
+    <div class="pagin">
+        <div class="message">共<i class="blue">{$lists->total()}</i>条记录，当前显示第&nbsp;<i class="blue">{$lists->currentPage()}&nbsp;</i>页,共 {$lists->lastPage()} 页</div>
+    </div>
+    <div class="pagelist">
+        {$lists->render()}
+    </div>
+    
+    
+    </div>
+
+    
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+    
+</body>
+    <div id="yq_div" style="margin-left:7%;margin-top:5%;" class="hidden">
+        <div style=" width:500px;height: 180px;">
+            <table style="margin-left:20%;">
+                <tr>
+                    <td>用户ID </td><td><input type="text" id="user_id" value="" name="user_id" />&nbsp;&nbsp;<button class="yq_button"> 确定 </button></td>
+                </tr>
+                <tr>
+                    <td>用户昵称（ID）</td><td><input type="text" id="user_name" value="" name="user_name" style="width:210px;" /><td id="family_status">有/无家族</td></td>
+                </tr>
+            </table>
+            <span style="margin-left:43%;"><button id="user_add">添加</button></span>
+        </div>
+    </div>
+
+    <div id="fh_div" style="margin-left:7%;margin-top:5%;" class="hidden" >
+        <div style=" width:500px;height: 100px;">
+            <table style="margin-left:20%;">
+                <tr>
+                    <span>请设置封禁时长</span>
+                </tr>
+                <tr>
+                    <span><input type="text" id="fh_div_day" name="day" /> 天 &nbsp;&nbsp; <input type="text" id="fh_div_hour" name="hour" />小时</span>
+                </tr>
+                <tr>
+                    <span style="margin-left:77px;margin-top:30px;"><button id="fh_div_yes">确定</button><button id="fh_div_no" style="margin-left:20px;">取消</button></span>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(".button1").on('click',function(){
+            var id = $(this).attr("family_id");
+            var url = "{:url('/index/index/family_user_data/id/"+id+"')}";
+
+            layer.open({
+                type : 2,
+                title : '查看家族成员资料',
+                area : ['800px', '90%'],
+                content : url
+            });
+        });
+
+        $(".button3").on('click',function(){
+            layer.open({
+              type: 1,
+              area: ['600px', '360px'],
+              shadeClose: true, //点击遮罩关闭
+              content: '\<\div style="padding:20px;">自定义内容3\<\/div>'
+            });
+        });
+
+        $(".button4").on('click', function(){
+            layer.open({
+              type: 1,
+              area: ['600px', '360px'],
+              shadeClose: true, //点击遮罩关闭
+              content: $('#yq_div')
+            }); 
+        });
+
+        $(".button5").on('click', function(){
+            layer.open({
+              type: 1,
+              area: ['400px', '300px'],
+              shadeClose: true, //点击遮罩关闭
+              content: $('#fh_div')
+            }); 
+        });
+
+       
+
+        $(".yq_button").click(function(){
+            var user_id = $('#user_id').val();
+            if(user_id == ''){
+                layer.open({
+                    content:'用户id不能为空',
+                    btn : ['关闭']
+                });
+                return false;
+            }
+            
+            $.ajax({
+                type : "POST",
+                url : "{:url('user_family_data')}",
+                data : {user_id : user_id},
+                dataType : 'json',
+                success : function(data){
+                    if(data){
+                        //显示用户昵称和id
+                        var user_data = data['user_name'] + "(" + data['id'] + ")";
+                        $("#user_name").val(user_data);
+                        //判断是否有家族
+                        if(data['family_id']){
+                            $("#family_status").html('有家族');
+                        } else {
+                            $("#family_status").html('无家族');
+                        }
+                    }else{
+                        $("#user_name").val('');
+                        layer.open({
+                            content:'该用户不存在！',
+                            btn : ['关闭']
+                        });
+                    }
+                }
+            });
+        });
+
+        $("#user_add").click(function(){
+            var user_id = $('#user_id').val();
+            if(user_id == ''){
+                layer.open({
+                    content:'用户id不能为空',
+                    btn : ['关闭']
+                });
+                return false;
+            }
+
+            $.ajax({
+                type : "POST",
+                url : "{:url('user_family_data')}",
+                data : {user_id : user_id},
+                dataType : 'json',
+                success : function(data){
+                    if(data){
+                        //判断是否有家族
+                        if(data['family_id']){
+                            layer.open({
+                                content:'该用户已有家族不能再添加家族',
+                                btn : ['确定']
+                            });
+                        } else {
+                            layer.open({
+                                content:'您的邀请已发出，需要用户在APP端同意，才能成功加入家族!',
+                                btn : ['确定']
+                            });
+                        }
+                    }else{
+                        $("#user_name").val('');
+                        layer.open({
+                            content:'该用户不存在！',
+                            btn : ['关闭']
+                        });
+                    }
+                }
+            });
+            
+        });
+
+
+        $("#fh_div_yes").click(function(){
+            var family_user_id = "";
+
+            //获取选择的数据id
+            $("input[name=family_user_id]").each(function(){
+                if($(this).attr("checked")){
+                    family_user_id += $(this).val() + ","; //获取所有checkbox的值，保存成字符串
+                }
+            });
+
+            if(family_user_id.length>0) {
+                family_user_id = family_user_id.substring(0, family_user_id.length - 1); //把最后一个逗号去掉
+            }
+
+            alert(family_user_id);
+            return false;
+
+            var fh_div_day = $("fh_div_day").val();
+            var fh_div_hour = $("fh_div_hour").val();
+
+            if (fh_div_day == "" || fh_div_hour == "") {
+                layer.open({
+                    content:'封禁时长设置不完整',
+                    btn : ['关闭']
+                });
+                return false;
+            } else {
+                $.ajax({
+                    type : "POST",
+                    url : "{:url('family_banned')}",
+                    data : {}
+                });
+            }
+        });
+    </script>
+
+</html>

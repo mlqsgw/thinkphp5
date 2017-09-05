@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="/static/js/jquery.js"></script>
+<script language="JavaScript" src="/static/ueditor/ueditor.config.js"></script>
+<script language="JavaScript" src="/static/ueditor/ueditor.all.min.js"></script>
+<script language="JavaScript" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="formbody">
+    <ul class="forminfo">
+    <li><label>用户ID</label><input type="text" value="{$family_data['id']}" readonly class="dfinput" /></li>
+    <li><label>昵称</label><input name="user_name" type="text" value="{$family_data['user_name']}" readonly class="dfinput" /></li> 
+    <li><label>手机号</label><input name="user_phone" type="text" value="{$family_data['user_phone']}" readonly class="dfinput" /></li>
+    <li><label>家族</label><input name="family_id" type="text" value="{$family_data['family_id']}" readonly class="dfinput"/></li>
+    <li><label>粉丝数</label><input name="fans_num" type="text" value="{$family_data['fans_num']}" readonly class="dfinput"/></li>
+
+    <li><label>关注数</label><input name="attention_num" type="text" value="{$family_data['attention_num']}" readonly class="dfinput"/></li>
+    <li><label>总贡献值</label><input name="contribution_all" type="text" value="{$family_data['contribution_all']}" readonly class="dfinput"/></li>
+    <li><label>总魅力值</label><input name="charm_all" type="text" value="{$family_data['charm_all']}" readonly class="dfinput"/></li>
+    <li><label>本期贡献值</label><input name="contribution_now" type="text" value="{$family_data['contribution_now']}" readonly class="dfinput"/></li>
+    <li><label>本期魅力值</label><input name="charm_now" type="text" value="{$family_data['charm_now']}" readonly class="dfinput"/></li>
+    <li><label>本期的有效天数</label><input name="valid_day_num" type="text" value="{$family_data['valid_day_num']}" readonly class="dfinput"/></li>
+    <li><label>本期直播时长</label><input name="periods" type="text" value="{$family_data['live_time_num']}" readonly class="dfinput"/></li>
+    <li><label>期数</label><input name="periods" type="text" value="{$family_data['periods']}" readonly class="dfinput"/></li>
+    <li><label>状态</label><input name="user_status" type="text" value="{$family_data['user_status']}" readonly class="dfinput"/></li>
+    
+    </ul>
+    </div>
+
+</body>
+</html>

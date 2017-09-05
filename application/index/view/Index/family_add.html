@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="/static/js/jquery.js"></script>
+<script language="JavaScript" src="/static/ueditor/ueditor.config.js"></script>
+<script language="JavaScript" src="/static/ueditor/ueditor.all.min.js"></script>
+<script language="JavaScript" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script language="JavaScript" src="/static/js/jquery-form.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="formbody">
+    
+    <div class="formtitle"><span>创建家族</span></div>
+    <form id= "data-form" method="post" action="{:url('family_add_do')}" enctype="multipart/form-data">
+    <ul class="forminfo">
+    <input type="hidden" name="family_image" value=""  id="hidden_url"/>
+    <li><label>家族ID</label><input name="family_id" type="text" class="dfinput" /></li>
+    <li><label>家族长ID</label><input name="family_big_id" type="text" class="dfinput" /></li> 
+    <li><label>家族名称</label><input name="family_name" type="text" class="dfinput" /></li>
+    <li><label>提成系数</label><input name="coefficient" type="text" class="dfinput" value="0.40" /></li>
+    <li><label>家族宣言</label><textarea name="family_declaration" cols="" rows="" class="textinput"></textarea></li>
+    <!-- <li><label>家族头像</label><input type="file" class="file" name="file" id="family_image"/></li>  -->
+    <li><label>备注</label><textarea name="remark" cols="" rows="" class="textinput"></textarea></li>
+    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认添加"/></li>
+    </ul>
+    </form>
+    </div>
+
+</body>
+<script>
+
+    // $(".btn").click(function(){
+    //     var form = new FormData(document.getElementById("tf"));
+    //     var file=document.getElementById("family_image").files[0];
+    //     var family_image = file["name"];
+    //     $("#hidden_url").val(family_image);
+
+    //     $.ajax({
+    //         type : "POST",
+    //         url : "{:url('family_add_do')}",
+    //         data : $("#data-form").serializeArray(),
+    //         dataType : 'json',
+    //         success : function(data){
+    //             if (data["status"]) {
+    //                 location.href = "{:url('family_list')}";
+    //             } else {
+    //                 alert(data["message"]);
+    //             }
+    //         }
+    //     });
+    // });
+
+    // $(".btn").click(function(){
+    //     $("#data-form").ajaxSubmit({
+    //       type : "POST",
+    //       url : "{:url('family_add_do')}",
+    //       // data : $("#data-form").serializeArray(),
+    //       dataType : 'json',
+    //       success : function(data){
+    //             if (data["status"]) {
+    //                 location.href = "{:url('family_list')}";
+    //             } else {
+    //                 alert(data["message"]);
+    //             }
+    //       }
+    //     });
+    // });
+    
+    
+</script>
+
+</html>

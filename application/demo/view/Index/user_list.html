@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery1.8.0.min.js"></script>
+<script type="text/javascript" src="/static/js/showdate.js"></script>
+<script type="text/javascript" src="/static/js/layer/layer.js"></script>
+<style>
+    .pagelist {padding:10px 0; text-align:center;}
+    .pagelist span,.pagelist a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+    .pagelist a{ margin:0 3px;}
+    .pagelist span.current{ background:#09F; color:#FFF; border-color:#09F; margin:0 2px;}
+    .pagelist a:hover{background:#09F; color:#FFF; border-color:#09F; }
+    .pagelist label{ padding-left:15px; color:#999;}
+    .pagelist label b{color:red; font-weight:normal; margin:0 3px;}
+</style>
+
+
+
+
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">数据表</a></li>
+    <li><a href="#">基本内容</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+    
+    	<ul class="toolbar">
+            <a href="{:url('family_add')}"><li class="click"><a href="{:url('payExport')}"><span></span>导出Excel</a></li></a>
+        </ul>
+        
+        <form action="{:url('user_list')}" method="get">
+        <ul class="toolbar1">
+            <li><span>开始时间:<input type="text" id="st" name="st" onclick="return Calendar('st');" value="" class="text" style="width:85px;"/>-结束时间<input type="text" id="et" onclick="return Calendar('et');" value="" name="et" class="text" style="width:85px;"/>&nbsp;&nbsp;&nbsp;<input type="text" name="search_name" style="height:22px;background: #d4e7f0;" placeholder="家族id"><input type="submit" value="搜索" /></span></li>
+        </ul>
+        </form>
+        
+    </div>
+    
+    <table class="tablelist">
+        <thead>
+        <tr>
+        <!-- <th><input name="" type="checkbox" value="" checked="checked"/></th> -->
+        <th>用户ID</th>
+        <th>昵称</th>
+        <th>姓名</th>
+        <th>所属单位ID</th>
+        <th>状态</th>
+        <th>角色ID</th>
+        <th>注册人ID</th>
+        <th>备注</th>
+        <th>是否可用</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="lists" id="family">
+        <tr>
+        <!-- <td><input name="" type="checkbox" value="" /></td> -->
+        <td>{$family.id}</td>
+        <td>{$family.username}</td>
+        <td>{$family.realname}</td>
+        <td>{$family.acc_unit_id}</td>
+        <td>{$family.status}</td>
+        <td>{$family.role_id}</td>
+        <td>{$family.register_id}</td>
+        <td>{$family.memo}</td>
+        <td>{$family.enable}</td>
+
+        </tr> 
+        </volist>
+        </tbody>
+    </table>
+    
+   
+    <div class="pagin">
+        <div class="message">共<i class="blue">{$lists->total()}</i>条记录，当前显示第&nbsp;<i class="blue">{$lists->currentPage()}&nbsp;</i>页,共 {$lists->lastPage()} 页</div>
+    </div>
+    <div class="pagelist">
+        {$lists->render()}
+    </div>
+    
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="/static/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
+    
+    
+    
+    
+    </div>
+    
+    <script type="text/javascript">
+        $(".button1").on('click',function(){
+            var id = $(this).attr("family_id");
+            var url = "{:url('/index/index/family_user_data/id/"+id+"')}";
+
+            layer.open({
+                type : 2,
+                title : '查看主播资料',
+                area : ['800px', '90%'],
+                content : url
+            });
+        });
+    </script>
+
+</body>
+
+</html>

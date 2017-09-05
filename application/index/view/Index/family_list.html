@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery1.8.0.min.js"></script>
+<script type="text/javascript" src="/static/js/showdate.js"></script>
+<script type="text/javascript" src="/static/js/layer/layer.js"></script>
+
+<style>
+    .pagelist {padding:10px 0; text-align:center;}
+    .pagelist span,.pagelist a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+    .pagelist a{ margin:0 3px;}
+    .pagelist span.current{ background:#09F; color:#FFF; border-color:#09F; margin:0 2px;}
+    .pagelist a:hover{background:#09F; color:#FFF; border-color:#09F; }
+    .pagelist label{ padding-left:15px; color:#999;}
+    .pagelist label b{color:red; font-weight:normal; margin:0 3px;}
+    .hidden {display: none;}
+</style>
+
+</head>
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">数据表</a></li>
+    <li><a href="#">基本内容</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+    
+    	<ul class="toolbar">
+            <if condition="$user_status == 1">
+                <a><li class="button3"><span><img src="/static/images/t01.png" /></span>添加家族</li></a>
+            </if>
+            <a ><li class="button4"><span><img src="/static/images/t01.png" /></span>解散家族</li></a>
+        </ul>
+        
+        
+        <ul class="toolbar1">
+        <li><span><img src="/static/images/t05.png" /></span>设置</li>
+        </ul>
+    
+    </div>
+    
+    <table class="tablelist">
+        <thead>
+        <tr>
+        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th>编号<i class="sort"><img src="/static/images/px.gif" /></i></th>
+        <th>家族ID</th>
+        <th>家族长ID</th>
+        <th>家族名称</th>
+        <th>提成系数</th>
+        <th>家族宣言</th>
+        <!-- <th>家族头像</th> -->
+        <th>备注</th>
+
+        <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="lists" id="family">
+        <tr>
+        <td><input name="family_list_id" type="checkbox" value="{$family.id}" /></td>
+        <td>{$family.id}</td>
+        <td>{$family.family_id}</td>
+        <td>{$family.family_big_id}</td>
+        <td>{$family.family_name}</td>
+        <td>{$family.coefficient}</td>
+        <td>{$family.family_declaration}</td>
+        <!-- <td>{$family.family_image}</td> -->
+        <td>{$family.remark}</td>
+
+        <td><a class="button1" family_id = "{$family.id}"><font color="#056dae">查看家族资料</font></a>   <a  class="button2" family_id2 = "{$family.id}"><font color="#056dae">编辑家族资料</font></a>     <a href="{:url('family_user_list')}?family_id={$family.family_id}"><font color="#056dae">家族成员</font></a></td>
+        </tr> 
+        </volist>
+        </tbody>
+    </table>
+    
+   
+    <div class="pagin">
+        <div class="message">共<i class="blue">{$lists->total()}</i>条记录，当前显示第&nbsp;<i class="blue">{$lists->currentPage()}&nbsp;</i>页,共 {$lists->lastPage()} 页</div>
+    </div>
+    <div class="pagelist">
+        {$lists->render()}
+    </div>
+    
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="/static/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
+
+
+    <div class="formbody hidden">
+        <div class="formtitle"><span>创建家族</span></div>
+        <form id= "data-form">
+        <ul class="forminfo">
+        <input type="hidden" name="family_image" value=""  id="hidden_url"/>
+        <li><label>家族ID</label><input name="family_id" type="text" class="dfinput" /></li>
+        <li><label>家族长ID</label><input name="family_big_id" type="text" class="dfinput" /></li> 
+        <li><label>家族名称</label><input name="family_name" type="text" class="dfinput" /></li>
+        <li><label>提成系数</label><input name="coefficient" type="text" class="dfinput" value="0.40" /></li>
+        <li><label>家族宣言</label><textarea name="family_declaration" cols="" rows="" class="textinput"></textarea></li>
+        <!-- <li><label>家族头像</label><input type="file" class="file" name="file" id="family_image"/></li> -->
+        <li><label>备注</label><textarea name="remark" cols="" rows="" class="textinput"></textarea></li>
+        <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认添加"/></li>
+        </ul>
+        </form>
+    </div>
+    
+    </div>
+    
+    <script type="text/javascript">
+    $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script>
+    $(".tablelink").click(function(){
+        var id = $(this).attr("family_id");
+        $.ajax({
+            type : "POST",
+            url : "{:url('family_del')}",
+            data : {id : id},
+            dataType : 'json',
+            success : function(data){
+                if (data["status"]) {
+                    alert("删除成功");
+                    location.href = "{:url('family_list')}";
+                } else {
+                    alert(data["message"]);
+                }
+            }
+
+        });
+    });
+
+
+    $(".button1").on('click',function(){
+        var id = $(this).attr("family_id");
+        var url = "{:url('/index/index/family_data/id/"+id+"')}";
+
+        layer.open({
+            type : 2,
+            title : '查看家族资料',
+            area : ['800px', '90%'],
+            content : url
+        });
+    });
+
+    $(".button2").on('click',function(){
+        var id2 = $(this).attr("family_id2");
+        var url = "{:url('/index/index/family_exit/id/"+id2+"')}";
+
+        layer.open({
+            type : 2,
+            title : '编辑家族资料',
+            area : ['800px', '90%'],
+            content : url
+        });
+    });
+
+    $(".button3").on('click',function(){
+
+        layer.open({
+            type : 1,
+            title : '添加家族',
+            area : ['800px', '90%'],
+            content : $('.formbody')
+        });
+    });
+
+    //添加家族
+    $(".btn").on('click', function(){
+        $.ajax({
+            type : "POST",
+            url : "{:url('family_add_do')}",
+            data : $("#data-form").serializeArray(),
+            dataType : 'json',
+            success : function(data){
+                // console.log(typeof(data));
+                var data_obj = JSON.parse(data);
+
+                if(data_obj.status){
+                    layer.open({
+                        content:'添加家族成功',
+                        btn : ['关闭']
+                    });
+                    location.href = "{'family_list'}";
+                    return false;
+                } else {
+                    layer.open({
+                        content:'添加家族失败',
+                        btn : ['关闭']
+                    });
+                    location.href = "{'family_list'}";
+                    return false;
+                }
+            }
+        });
+    });
+
+    $(".button4").on('click',function(){
+        var isc = "";
+
+        $("input[name=family_list_id]").each(function(){ //遍历table里的全部checkbox
+            if($(this).attr("checked")) //如果被选中
+            isc += $(this).val() + ","; //获取被选中的值
+        });
+        
+        if(isc.length > 0) {
+            //如果获取到
+            isc = isc.substring(0, isc.length - 1); //把最后一个逗号去掉
+        } else {
+            layer.open({
+                content : "请勾选要解散的家族",
+                btn : ['关闭']
+            });
+            exit;
+        }
+
+        layer.open({
+            content : "确认要解散家族吗？",
+            btn : ['确定', '取消'],
+            yes : function(index, layero){
+                $.ajax({
+                    type : "POST",
+                    url : "{:url('family_del')}",
+                    data : {isc : isc},
+                    dataType : 'json',
+                    success : function(data){
+                        if (data["status"]) {
+                            
+                            location.href = "{:url('family_list')}";
+                        } else {
+                            alert(data["message"]);
+                        }
+                    }
+
+                });
+                // location.href = "{:url('/index/index/family_del/isc/"+isc+"')}";
+            },
+            btn2 : function (index, layero){
+
+            }
+        });
+    });
+
+    </script>
+
+
+    
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="/static/js/jquery.js"></script>
+<script language="JavaScript" src="/static/ueditor/ueditor.config.js"></script>
+<script language="JavaScript" src="/static/ueditor/ueditor.all.min.js"></script>
+<script language="JavaScript" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">表单</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>文章类别管理</span></div>
+    <form id= "data-form">
+    <ul class="forminfo">
+    <li><label>文章标题</label><input name="title" type="text" class="dfinput" placeholder="请输入文章标题"/></li>
+    <li><label>文章简介</label><input name="intro" type="text" class="dfinput" placeholder="请输入文章简介"/></li>
+    <li><label>文章内容</label></li><br/><br/><br/>
+    <textarea style="width: 50%;height: 50%;" name="content" id="content" cols="" rows=""  placeholder="请输入文章内容"></textarea><br/>
+    <li><label>&nbsp;</label><input name="" type="button" class="btn" value="确认添加"/></li>
+    </ul>
+    </form>
+    </div>
+
+</body>
+<script>
+    $(".btn").click(function(){
+        $.ajax({
+            type : "POST",
+            url : "{:url('article_add_do')}",
+            data : $("#data-form").serializeArray(),
+            dataType : 'json',
+            success : function(data){
+                if (data["status"]) {
+                    location.href = "{:url('article')}";
+                } else {
+                    alert(data["message"]);
+                }
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+          UE.getEditor('content',{    //content为要编辑的textarea的id
+          initialFrameWidth: 1100,   //初始化宽度
+          initialFrameHeight: 500,   //初始化高度
+  });
+</script>
+</html>
